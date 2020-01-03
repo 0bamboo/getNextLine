@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdait-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 15:52:57 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/01/01 18:38:01 by abdait-m         ###   ########.fr       */
+/*   Created: 2020/01/01 15:49:10 by abdait-m          #+#    #+#             */
+/*   Updated: 2020/01/02 17:58:46 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 void		ft_cleanall(char **s_tab)
 {
@@ -50,37 +50,37 @@ int			ft_checkline(char **s_tab, char **line, int byt)
 	return (1);
 }
 
-int			ft_help(char **line, char **s_tab, int byt, int fd)
+int			ft_help(char **line, char **s_tab, int byt)
 {
 	if (line)
 		*line = ft_strdup("");
 	if (byt == -1)
 		return (-1);
-	else if (byt == 0 && s_tab[fd] == NULL)
+	else if (byt == 0 && !*s_tab)
 		return (0);
 	else
-		return (ft_checkline(&s_tab[fd], line, byt));
+		return (ft_checkline(s_tab, line, byt));
 }
 
 int			get_next_line(int fd, char **line)
 {
-	static char		*s_tab[F_LIMIT];
+	static char		*s_tab;
 	char			*buff;
 	int				byt;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 ||
 			!line || !(buff = (char *)malloc(BUFFER_SIZE + 1)))
-		return (ft_help(line, s_tab, -1, 0));
+		return (ft_help(line, &s_tab, -1));
 	while ((byt = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[byt] = '\0';
-		if (s_tab[fd] == NULL)
-			s_tab[fd] = ft_strdup(buff);
+		if (s_tab == NULL)
+			s_tab = ft_strdup(buff);
 		else
-			s_tab[fd] = ft_strjoin(s_tab[fd], buff);
-		if (ft_strchr(s_tab[fd], '\n'))
+			s_tab = ft_strjoin(s_tab, buff);
+		if (ft_strchr(s_tab, '\n'))
 			break ;
 	}
 	free(buff);
-	return (ft_help(line, s_tab, byt, fd));
+	return (ft_help(line, &s_tab, byt));
 }

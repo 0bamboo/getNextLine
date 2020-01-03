@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdait-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 15:50:28 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/01/01 15:56:51 by abdait-m         ###   ########.fr       */
+/*   Created: 2020/01/01 15:41:37 by abdait-m          #+#    #+#             */
+/*   Updated: 2020/01/01 15:56:18 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_H
 
-# define GET_NEXT_LINE_BONUS_H
-
-# define F_LIMIT 10240
+# define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
 
@@ -33,6 +31,6 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char *s1, char *s2);
 void		ft_cleanall(char **s_tab);
 int			ft_checkline(char **s_tab, char **line, int byt);
-int			ft_help(char **line, char **s_tab, int byt, int fd);
+int			ft_help(char **line, char **s_tab, int byt);
 
 #endif
